@@ -3,11 +3,17 @@
 //Page to retrieve from database
 
 //Create connection to db
-$server = "127.0.0.1";
-$username = "root";
-$password = "Nanoune12!";
 
-$conn = new PDO("mysql:host=$server;dbname=websites", $username, $password);
+//mysql://b4c2bd269d5d55:b0e01885@us-cdbr-iron-east-01.cleardb.net/heroku_a41d33233a6bf80?reconnect=true
+
+
+
+$server = "us-cdbr-iron-east-01.cleardb.net";
+$username= "b4c2bd269d5d55";
+$password = "b0e01885";
+
+
+$conn = new PDO("mysql:host=$server;dbname=heroku_a41d33233a6bf80", $username, $password);
 
 //Retrieve value from user
 $userInput = $_GET["userInput"];

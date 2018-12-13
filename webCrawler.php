@@ -1,18 +1,23 @@
 <?php
 
 //Should have a starting Page to scrape links
-$startPage = "https://www.google.com/search?source=hp&ei=qScRXPz6Neab5wK794_ABA&q=how+to+&btnK=Google+Search&oq=how+to+&gs_l=psy-ab.3..0l10.18446.20232..20971...0.0..1.139.505.6j1......0....1..gws-wiz.....0..0i131.ZGhZkASWD_Y";
+$startPage = "https://www.youtube.com/";
 $linkArr = array();
 $current = array();
 
 //Global mysql connection
-$servername = "127.0.0.1";
-$username = "root";
-$password = "Nanoune12!";
+
+//mysql://b4c2bd269d5d55:b0e01885@us-cdbr-iron-east-01.cleardb.net/heroku_a41d33233a6bf80?reconnect=true
+
+$server = "us-cdbr-iron-east-01.cleardb.net";
+$username= "b4c2bd269d5d55";
+$password = "b0e01885";
+
+
 
 try{
     //creating connection 
-    $conn = new PDO("mysql:host=$servername; dbname=websites",$username,$password);
+    $conn = new PDO("mysql:host=$servername; dbname=heroku_a41d33233a6bf80",$username,$password);
 
     //setting error mode
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
