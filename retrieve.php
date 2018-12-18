@@ -1,16 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Search Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link type="text/css" rel="stylesheet" href="styling.css">
+    </head>
+    <body>
+        <div class="main">
+                <h1><a href="index.html">Search Engine</a></h1>
+
+         <form method="GET" action="retrieve.php">
+                    <input type="text" id="userInput" name="userInput" placeholder="look up...">
+                    <input type="submit" value="Search">
+                </form>
+
+        </div>
+
 <?php
-
-//Page to retrieve from database
-
-//Create connection to db
-
-//mysql://b4c2bd269d5d55:b0e01885@us-cdbr-iron-east-01.cleardb.net/heroku_a41d33233a6bf80?reconnect=true
-
 
 
 $server = "us-cdbr-iron-east-01.cleardb.net";
 $username= "b4c2bd269d5d55";
 $password = "b0e01885";
+
+/*
+dbname=heroku_a41d33233a6bf80
+*/
 
 
 $conn = new PDO("mysql:host=$server;dbname=heroku_a41d33233a6bf80", $username, $password);
@@ -39,8 +54,10 @@ foreach($results as $result){
 
 }
 
-
-
-
-
 ?>
+
+
+               
+    </body>
+
+</html>

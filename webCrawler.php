@@ -1,7 +1,7 @@
 <?php
 
 //Should have a starting Page to scrape links
-$startPage = "https://www.youtube.com/";
+$startPage = "https://www.google.com/search?q=movies&oq=movies&aqs=chrome..69i57j69i61j0l4.782j0j4&sourceid=chrome&ie=UTF-8";
 $linkArr = array();
 $current = array();
 
@@ -9,10 +9,10 @@ $current = array();
 
 //mysql://b4c2bd269d5d55:b0e01885@us-cdbr-iron-east-01.cleardb.net/heroku_a41d33233a6bf80?reconnect=true
 
+
 $server = "us-cdbr-iron-east-01.cleardb.net";
 $username= "b4c2bd269d5d55";
 $password = "b0e01885";
-
 
 
 try{
@@ -29,6 +29,8 @@ catch (PDOException $e)
 }
 
 function getDetails($link){
+
+    
 
     global $conn;
 
@@ -59,12 +61,6 @@ function getDetails($link){
     echo $title . "\n";
     echo $description . "\n";
     echo $link . "\n";
-
-    //returning multiple things
-    //return '{ "Title": "'.str_replace("\n", "", $title).'", "Description": "'.str_replace("\n", "", $description).'", "Keywords": "'.str_replace("\n", "", $keywords).'", "URL": "'.$link.'"}';
-
-    //$dbNavigator = $conn->query("SELECT * FROM alreadyCrawled WHERE websitelink LIKE '$link'");
-    //$dbNavigator = $dbNavigator->fetch_row();
 
     //counting if any rows match data to be inputted
     $stmt = $conn->prepare("SELECT count(*) FROM alreadyCrawled WHERE websitelink =?");
@@ -111,6 +107,8 @@ function getDetails($link){
 //function to follow the links
 function followLinks($page){
 
+    
+
     global $linkArr;
     global $current;
 
@@ -120,7 +118,11 @@ function followLinks($page){
     //@ suppresses warnings
     @$doc->loadHTML(@file_get_contents($page));
 
+    
+
     $linkList = $doc->getElementsByTagName("a");
+
+    
 
     //For each linkList refer as link and get the attribute href, which is the link
     foreach($linkList as $link){
@@ -150,23 +152,18 @@ function followLinks($page){
             $retrievedLink = parse_url($page)["scheme"]."://".parse_url($page)["host"]."/".$retrievedLink;
         }
 
+        
+
         //Add links to array, if not already in it
         if(!in_array($retrievedLink, $linkArr)){
             $linkArr[] = $retrievedLink;
             $current[] = $retrievedLink;
 
+            
+
             //holds the JSON format of information from getDetails
             getDetails($retrievedLink);
 
-
-            //Check if website is in db already
-            
-            //echo "Test for details: " . $details;
-            //var_dump($details);
-
-            //echo getDetails($retrievedLink);
-
-            //just add to db in getDetails
         }
 
 
